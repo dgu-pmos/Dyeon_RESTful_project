@@ -6,6 +6,7 @@ router.post('/', async(req, res) => {
     res.status(statusCode.BAD_REQUEST).send(utils.successFalse(responseMessage.X_NULL_VALUE(missParameters)));
     return;
     */
+    const result = 'ok';
     res.status(statusCode.OK).send(utils.successTrue(responseMessage.BOARD_CREATE_SUCCESS, result));
 });
 
