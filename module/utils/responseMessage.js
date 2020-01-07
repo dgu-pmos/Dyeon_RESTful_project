@@ -36,35 +36,23 @@ module.exports = {
     MYPAGE_READ_SUCCESS: "마이페이지 조회 성공",
     MYPAGE_READ_FAIL: "마이페이지 조회 실패",
     MYPAGE_UPDATE_SUCCESS: "마이페이지 수정 성공",
-    MYPAGE_UPDATE_FAIL: "마이페이지 수정 실패",
 
-    RECOMMEND_READ_SUCCESS: "추천 여행지 조회 성공",
-    RECOMMEND_READ_FAIL: "추천 여행지 조회 실패",
+    COMMENT_CREATE_SUCCESS: "댓글 생성 성공",
+    COMMENT_CREATE_FAIL: "댓글 생성 실패",
+    COMMENT_UPDATE_SUCCESS: "댓글 수정 성공",
+    COMMENT_UPDATE_FAIL: "댓글 수정 실패",
+    COMMENT_READ_SUCCESS: "댓글 조회 성공",
+    COMMENT_READ_FAIL: "댓글 조회 실패",
+    COMMENT_DELETE_SUCCESS: "댓글 삭제 성공",
+    COMMENT_DELETE_FAIL: "댓글 삭제 실패",
 
-    MATE_READ_SUCCESS: "위드 메이트 조회 성공",
-    MATE_READ_FAIL: "위드 메이트 조회 실패",
-
-    ACTIVATE_SUCCESS:"마감 풀기 성공",
-    ACTIVATE_FALSE:"마감 풀기 실패",
-
-    READ_REGION_LIST_SUCCESS: "국가 리스트 조회 성공",
-    READ_REGION_LIST_FAIL: "국가 리스트 조회 살패",
-
-    READ_HOME_BGIMG_SUCCESS: "홈배경 이미지 조회 성공",
-    READ_HOME_BGIMG_FAIL: "홈배경 이미지 조회 실패",
-
-    EVALUATE_SUCCESS:"동행 평가 성공",
-    EVALUATE_FAIL:"동행 평가 실패",
-    
-    CHAT_CREATE_SUCCESS:"채팅방 생성 성공",
-    CHAT_CREATE_FAIL:"채팅방 생성 실패",
-    ALREADY_CHAT: "이미 채팅방이 존재합니다",
-
-    CHAT_READ_ALL_SUCCESS:"채팅방 전체 조회 성공",
-    CHAT_READ_ALL_FAIL:"채팅방 전체 조회 실패",
-
-    WITH_SUCCESS: "동행 성공",
-    WITH_FAIL: "동행 실패",
+    LIKE_CREATE_SUCCESS: "좋아요 생성 성공",
+    LIKE_CREATE_FAIL: "좋아요 생성 실패",
+    LIKE_READ_SUCCESS: "좋아요 조회 성공",
+    LIKE_READ_FAIL: "좋아요 조회 실패",
+    LIKE_DELETE_SUCCESS: "좋아요 삭제 성공",
+    LIKE_DELETE_FAIL: "좋아요 삭제 실패",
+    LIKE_ALREADY: "이미 좋아요 했습니다",
 
     X_NULL_VALUE: (x) => `${x}가 존재하지 않습니다.`,
     X_CREATE_SUCCESS: (x) => `${x} 작성 성공`,
