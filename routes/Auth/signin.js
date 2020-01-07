@@ -15,10 +15,10 @@ const jwt = require('../../module/utils/jwt');
 
 router.post('/', async(req, res) => {
     //이메일과 패스워드로 로그인을 한다.
-    const { email, pwd }  = req.body; 
+    const { email, password }  = req.body; 
     //둘중 하나라도 값이 없으면...
-    if(!email || !pwd){
-        const missParameters = Object.entries({email, pwd})
+    if(!email || !password){
+        const missParameters = Object.entries({email, password})
         .filter(it => it[1] == undefined).map(it => it[0]).join(',');
         res.status(statusCode.BAD_REQUEST).send(defaultRes.successFalse(resMessage.X_NULL_VALUE(missParameters)));
     }
@@ -33,10 +33,10 @@ router.post('/', async(req, res) => {
     if(selectResult.length == 0){
         res.status(statusCode.BAD_REQUEST).send(defaultRes.successFalse(resMessage.X_NULL_VALUE("해당("+email+")")));
     }
-    
+
     //유저가 있을 때
     else{
-        const passwordChecking = await User.checkPassword(email, pwd);
+        const passwordChecking = await User.checkPassword(email, password);
         console.log(passwordChecking);
         if(passwordChecking.length == 0){
             res.status(statusCode.BAD_REQUEST).send(defaultRes.successFalse(resMessage.MISS_MATCH_PW)); 

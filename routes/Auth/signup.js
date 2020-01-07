@@ -12,17 +12,17 @@ const User = require('../../model/User');
 // 회원가입
 // userIdx id pwd name
 router.post('/', async (req, res) => {
-    const {email, pwd, name} = req.body;
-    const json = {email, pwd, name};
-    if(!email || !pwd || !name){
-        const missParameters = Object.entries({email, pwd, name})
+    const {email, password, name} = req.body;
+    const json = {email, password, name};
+    if(!email || !password || !name){
+        const missParameters = Object.entries({email, password, name})
         .filter(it => it[1] == undefined).map(it => it[0]).join(',');
         res.status(statusCode.BAD_REQUEST).send(defaultRes.successFalse(resMessage.X_NULL_VALUE(missParameters)));
         return;
     }
 
     CheckUser = await User.checkUser(email);
-    console.log(CheckUser);
+
     if(!CheckUser){
         res.status(200).send(defaultRes.successFalse(resMessage.DB_ERROR));    // DB ERROR
         return ;
