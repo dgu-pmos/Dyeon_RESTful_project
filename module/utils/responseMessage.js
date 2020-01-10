@@ -1,3 +1,4 @@
+// 결과 메세지로 사용할 문자열들의 모음
 module.exports = {
     NULL_VALUE: "필요한 값이 없습니다.",
     OUT_OF_VALUE: "파라미터 값이 잘못 되었습니다.",

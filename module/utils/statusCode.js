@@ -1,3 +1,4 @@
+// 응답 코드로 사용할 코드들의 모음
 module.exports = {
     OK: 200,
     CREATED: 201,
