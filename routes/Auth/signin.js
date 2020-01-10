@@ -11,11 +11,11 @@ const jwt = require('../../module/utils/jwt');
 // 로그인 라우트
 router.post('/', async(req, res) => {
     // request body로부터 로그인 정보를 받는다.
-    const { email, pwd }  = req.body; 
+    const { email, password }  = req.body; 
     // miss parameter가 있는지 검사한다.
-    if(!email || !pwd){
+    if(!email || !password){
         // entries 메소드는 객체가 가지고 있는 모든 프로퍼티를 키와 값 쌍으로 배열 형태로 반환해준다.
-        const missParameters = Object.entries({email, pwd})
+        const missParameters = Object.entries({email, password})
         // 배열로 바꾼 상태에서 value 값이 undefined 인 경우, missParameters 변수에 추가된다.
         .filter(it => it[1] == undefined).map(it => it[0]).join(',');
         res.status(statusCode.BAD_REQUEST).send(utils.successFalse(responseMessage.X_NULL_VALUE(missParameters)));
@@ -33,7 +33,7 @@ router.post('/', async(req, res) => {
     // 유저가 있을 때
     else{
         // 패스워드가 일치하지 않는다면 에러 메세지 출력
-        const passwordChecking = await User.checkPassword(email, pwd);
+        const passwordChecking = await User.checkPassword(email, password);
         if(passwordChecking.length == 0){
             res.status(statusCode.BAD_REQUEST).send(utils.successFalse(responseMessage.MISS_MATCH_PW)); 
         }else{

@@ -9,24 +9,25 @@ const User = require('../../model/User');
 // 회원가입 라우트
 router.post('/', async (req, res) => {
     // request body로부터 가입 정보를 받는다.
-    const {email, pwd, name} = req.body;
-    const json = {email, pwd, name};
+    const {email, password, name} = req.body;
+    const json = {email, password, name};
     // miss parameter가 있는지 검사한다.
-    if(!email || !pwd || !name){
-        const missParameters = Object.entries({email, pwd, name})
+    if(!email || !password || !name){
+        const missParameters = Object.entries({email, password, name})
         .filter(it => it[1] == undefined).map(it => it[0]).join(',');
         res.status(statusCode.BAD_REQUEST).send(utils.successFalse(responseMessage.X_NULL_VALUE(missParameters)));
         return;
     }
     // 존재하는 계정인지 확인한다.
     CheckUser = await User.checkUser(email);
+    // DB 에러
     if(!CheckUser){
         res.status(statusCode.INTERNAL_SERVER_ERROR).send(utils.successFalse(responseMessage.DB_ERROR));    
         return;
     }
     // 유저가 있는 경우
     if(CheckUser.length != 0){   
-        res.status(statusCode.BAD_REQUEST).send(utils.successFalse(responseMessage.ALREADY_ID));    // 필요한 값이 없습니다.
+        res.status(statusCode.BAD_REQUEST).send(utils.successFalse(responseMessage.ALREADY_ID));
         return;
     }
 
