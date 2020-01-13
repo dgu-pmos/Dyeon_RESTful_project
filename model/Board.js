@@ -12,9 +12,23 @@ module.exports = {
         return result;
     },
 
+    maxPage : async (page) => {
+        const result = await pool.queryParam_None(`
+        SELECT COUNT(*) AS cnt FROM Board
+        WHERE active = 1
+        `)
+        return result;
+    },
+
     // 게시글 전체 조회 함수
-    readAll : async () => {
-        const result = await pool.queryParam_None(`SELECT * FROM Board WHERE active = 1`);
+    readAll : async (page) => {
+        //const result = await pool.queryParam_None(`SELECT * FROM Board WHERE active = 1`);
+        const offset_num = (3 * page) - 3;
+        let result = await pool.queryParam_None(`
+        SELECT * FROM Board JOIN User ON Board.userIdx = User.userIdx 
+        WHERE active = 1
+        LIMIT ${offset_num}, 3
+        `)
         return result;
     },
 

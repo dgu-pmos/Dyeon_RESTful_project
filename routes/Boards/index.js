@@ -22,10 +22,11 @@ router.post('/', authUtil.validToken, async (req, res) => {
     // authUtil 미들웨어로부터 user_id 를 받는다.
     const userIdx = req.decoded.userIdx;
     // request body로부터 게시글 입력 정보들을 받는다.
-    const {title, content, active} = req.body;
+    const {title, content} = req.body;
+    const active = 1;
     // miss parameter가 있는지 검사한다.
-    if(!userIdx || !title || !content || !active){
-        const missParameters = Object.entries({userIdx, title, content, active})
+    if(!userIdx || !title || !content){
+        const missParameters = Object.entries({userIdx, title, content})
         .filter(it => it[1] == undefined).map(it => it[0]).join(',');
         res.status(statusCode.BAD_REQUEST).send(utils.successFalse(responseMessage.X_NULL_VALUE(missParameters)));
         return;
@@ -73,15 +74,32 @@ router.put('/:boardIdx', authUtil.validToken, async (req, res) => {
 });
 
 // 게시글 전체 조회 라우트
-router.get('/', async (req, res) => {
+router.get('/pages/:page', async (req, res) => {
+    const page = Number(req.params.page);
+    if(!page){
+        res.status(statusCode.BAD_REQUEST).send(utils.successFalse(responseMessage.X_NULL_VALUE('page number')));
+        return;
+    }
+
     // 게시글 전체 조회 함수 호춣
-    const result = await Board.readAll();
+    let result = await Board.readAll(page);
 
     // 조회에 실패했다면
     if(!result){
         res.status(statusCode.INTERNAL_SERVER_ERROR).send(utils.successFalse(responseMessage.BOARD_READ_ALL_FAIL));
         return;
     }
+
+    let maxPage = await Board.maxPage();
+    maxPage[0].cnt = maxPage[0].cnt / 3;
+
+    // 최대 페이지 조회에 실패했다면
+    if(!result){
+        res.status(statusCode.INTERNAL_SERVER_ERROR).send(utils.successFalse(responseMessage.BOARD_READ_ALL_FAIL));
+        return;
+    }
+
+    result.push({maxPage : maxPage[0].cnt});
 
     res.status(statusCode.OK).send(utils.successTrue(responseMessage.BOARD_READ_ALL_SUCCESS, result));
     return;
